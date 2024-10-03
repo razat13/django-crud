@@ -81,9 +81,9 @@
               </tr>
             </thead>
             <tbody>
-              {% for d in data %}
+              {% for d,id in combined %}
               <tr>
-                <th scope="row">{{d.id}}</th>
+                <th scope="row">{{id}}</th>
                 <td>{{d.name}}</td>
                 <td>{{d.email}}</td>
                 <td>{{d.age}}</td>

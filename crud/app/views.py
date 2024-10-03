@@ -4,7 +4,12 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 def index(request):
     data=Student.objects.all()
-    context={"data":data}
+    next_id=[]
+    n=Student.objects.count()
+    for i in range(1,n+1):
+        next_id.append(i)  
+    combined=zip(data,next_id)
+    context={"combined":combined}
     return render(request,"index.html",context)
 def about(request):
     return render(request,"about.html")
@@ -33,8 +38,11 @@ def updateData(request,id):
         edit.save()
         return redirect("/")
     d=Student.objects.get(id=id)
+    next_id=Student.objects.count()
+    next_id+=1
     print(d)
-    context={"d":d}
+    print(next_id)
+    context={"d":d,"next_id":next_id}
     return render(request,"edit.html",context)
 def deleteData(request,id):
     d=Student.objects.get(id=id)
